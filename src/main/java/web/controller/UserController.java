@@ -45,7 +45,7 @@ public class UserController {
         return "edit";
     }
 
-    @GetMapping("/edit")
+    @PostMapping("/edit")
     public String editUser(@RequestParam("id") Long id, @ModelAttribute User user) {
         userService.editUser(id, user);
         return "redirect:/users";
@@ -56,7 +56,7 @@ public class UserController {
         model.addAttribute("user",userService.getUser(id));
         return "delete";
     }
-    @GetMapping("/delete")
+    @PostMapping("/delete")
     public String deleteUser(@RequestParam("id") Long id) {
         userService.deleteUser(id);
         return "redirect:/users";
