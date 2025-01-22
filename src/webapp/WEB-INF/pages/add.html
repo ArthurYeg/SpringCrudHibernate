@@ -9,9 +9,9 @@
 <form align="center" th:method="POST" th:action="@{/input}" th:object="${user}">
 
     <label for="name">Enter name</label>
-    <input type="text" th:field="*{name}" id="name"/><br>
-    <label for="second_name">Enter second name</label>
-    <input type="text" th:field="*{second_name}" id="second_name"/><br>
+    <input type="text" th:field="*{first_name}" id="name"/><br>
+    <label for="last_name">Enter last name</label>
+    <input type="text" th:field="*{last_name}" id="last_name"/><br>
     <label for="age">Enter age</label>
     <input type="text" th:field="*{age}" id="age"/><br>
     <label for="email">Enter email</label>

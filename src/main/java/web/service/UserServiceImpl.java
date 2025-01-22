@@ -11,7 +11,6 @@ import web.model.User;
 
 @Service()
 public class UserServiceImpl implements UserService {
-
     private final UserDao userDao;
 
     @Autowired
@@ -31,25 +30,21 @@ public class UserServiceImpl implements UserService {
         return userDao.listUsers();
     }
 
-
     @Transactional(readOnly = true)
     @Override
     public User getUser(Long id) {
-
         return userDao.getUser(id);
     }
 
     @Transactional
     @Override
     public void editUser(Long id, User user) {
-
         userDao.editUser(id, user);
     }
 
     @Transactional
     @Override
     public void deleteUser(Long id) {
-
         userDao.deleteUser(id);
     }
 }

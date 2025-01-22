@@ -9,26 +9,25 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "name")
+    @Column(name = "first_name")
+    private String first_name;
 
-    private String name;
-
-    @Column(name = "second_name")
-    private String second_name;
+    @Column(name = "last_name")
+    private String last_name;
 
     @Column(name = "age")
     private int age;
-    @Column(name = "email")
 
+    @Column(name = "email")
     private String email;
 
     public User() {
     }
 
-    public User(String name, String second_name, int age, String email) {
+    public User(String first_name, String last_name, int age, String email) {
 
-        this.name = name;
-        this.second_name = second_name;
+        this.first_name = first_name;
+        this.last_name = last_name;
         this.age = age;
         this.email = email;
     }
@@ -36,39 +35,30 @@ public class User {
     public Long getId() {
         return id;
     }
-
     public void setId(Long id) {
         this.id = id;
     }
-
-    public String getName() {
-        return name;
+    public String getFirst_name() {
+        return first_name;
     }
-
-    public void setName(String name) {
-        this.name = name;
+    public void setFirst_name(String name) {
+        this.first_name = name;
     }
-
-    public String getSecond_name() {
-        return second_name;
+    public String getLast_name() {
+        return last_name;
     }
-
-    public void setSecond_name(String second_name) {
-        this.second_name = second_name;
+    public void setLast_name(String last_name) {
+        this.last_name = last_name;
     }
-
     public int getAge() {
         return age;
     }
-
     public void setAge(int age) {
         this.age = age;
     }
-
     public String getEmail() {
         return email;
     }
-
     public void setEmail(String email) {
         this.email = email;
     }
@@ -78,8 +68,8 @@ public class User {
 
         return "User{" +
                 "id=" + id +
-                ", name='" + name + '\'' +
-                ", second_name='" + second_name + '\'' +
+                ", name='" + first_name + '\'' +
+                ", last_name='" + last_name + '\'' +
                 ", age=" + age +
                 ", email='" + email + '\'' +
                 '}';

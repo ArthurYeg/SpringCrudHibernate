@@ -25,22 +25,21 @@ import java.util.Properties;
 @PropertySource("classpath:db.properties")
 public class HibernateConfig {
 
-    private final Environment env;
+    private final Environment environment;
 
     @Autowired
-    public HibernateConfig(ApplicationContext applicationContext, Environment env) {
-
-        this.env = env;
+    public HibernateConfig(ApplicationContext applicationContext, Environment environment) {
+        this.environment = environment;
     }
 
     @Bean
     public DataSource getDataSource() {
-
         DriverManagerDataSource dataSource = new DriverManagerDataSource();
-        dataSource.setDriverClassName(Objects.requireNonNull(env.getRequiredProperty("db.driver")));
-        dataSource.setUrl(env.getRequiredProperty("db.url"));
-        dataSource.setUsername(env.getRequiredProperty("db.username"));
-        dataSource.setPassword(env.getRequiredProperty("db.password"));
+
+        dataSource.setDriverClassName(Objects.requireNonNull(environment.getRequiredProperty("db.driver")));
+        dataSource.setUrl(environment.getRequiredProperty("db.url"));
+        dataSource.setUsername(environment.getRequiredProperty("db.username"));
+        dataSource.setPassword(environment.getRequiredProperty("db.password"));
         return dataSource;
     }
 
@@ -59,9 +58,9 @@ public class HibernateConfig {
     private Properties hibernateProperties() {
 
         Properties properties = new Properties();
-        properties.put("hibernate.dialect", env.getRequiredProperty("hibernate.dialect"));
-        properties.put("hibernate.show_sql", env.getRequiredProperty("hibernate.show_sql"));
-        properties.put("hibernate.hbm2ddl.auto", env.getProperty("hibernate.hbm2ddl.auto"));
+        properties.put("hibernate.dialect", environment.getRequiredProperty("hibernate.dialect"));
+        properties.put("hibernate.show_sql", environment.getRequiredProperty("hibernate.show_sql"));
+        properties.put("hibernate.hbm2ddl.auto", environment.getProperty("hibernate.hbm2ddl.auto"));
         return properties;
     }
 
