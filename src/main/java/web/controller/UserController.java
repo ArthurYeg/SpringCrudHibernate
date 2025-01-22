@@ -22,37 +22,36 @@ public class UserController {
     }
 
     @GetMapping("/users")
-    public String showUsers( ModelMap model) {
+    public String showUsers( Model model) {
         model.addAttribute("users", userService.listUsers());
         return "users";
     }
 
     @PostMapping("/add")
-    public String addUser(ModelMap model) {
-        User user = new User();
-        model.addAttribute("user", user);
+    public String addUser(Model model) {
+        model.addAttribute("user", new User());
         return "add";
     }
 
-    @PostMapping("/input")
-    public String inputUser(@ModelAttribute("user") User user) {
+    @PostMapping("/add")
+    public String AddUserForm(@ModelAttribute User user) {
         userService.addUser(user);
         return "redirect:/users";
     }
 
-    @GetMapping("/{id}/edit")
+    @GetMapping("/edit")
     public String editUser(@RequestParam("id") Long id, Model model) {
-        model.addAttribute("editable_user", userService.getUser(id));
+        model.addAttribute("user", userService.getUser(id));
         return "edit";
     }
 
-    @GetMapping("/{id}")
-    public String edit(@ModelAttribute("editable_user") User user, @RequestParam("id") Long id) {
+    @GetMapping("/edit")
+    public String editUser(@RequestParam("id") Long id, @ModelAttribute User user) {
         userService.editUser(id, user);
         return "redirect:/users";
     }
 
-    @DeleteMapping("/delete")
+    @PostMapping("/delete")
     public String delete(@RequestParam("id") Long id) {
         userService.deleteUser(id);
         return "redirect:/users";

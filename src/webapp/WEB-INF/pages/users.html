@@ -6,7 +6,7 @@
         text-align: center;
     }
     </style>
-    <title>USERS</title>
+    <title>User List</title>
 </head>
 <body>
 <h1 style="text-align: center;"><strong>USERS LIST</strong></h1>
@@ -16,24 +16,19 @@
 <br>
 <table border="1" align="center" cellspacing="0" cellpadding="3">
     <tr>
+        <th>ID</th>
         <th>Name</th>
         <th>Last Name</th>
         <th>Age</th>
         <th>Email</th>
+
     </tr>
-    <tr  style="text-align:center" th:each="user : ${users}">
-        <td th:text="${user.getFirst_name()}">Name</td>
-        <td th:text="${user.getLast_name()}">Last Name</td>
-        <td th:text="${user.getAge()}">Age</td>
-        <td th:text="${user.getEmail()}">Email</td>
-        <td> <a th:href="@{/{id}/edit(id=${user.getId()})}">
-            <div class="text-center"><input type="button" value="Add user" onclick="window.location.href = 'add'"/></div>
-        <button type="button">Edit user </button></a>
-        <form th:method="DELETE" th:action="@{/{id}(id=${user.getId()})}">
-            <input type="submit" value = "Delete user"/>
-        </form>
-        </td>
+    <tr  style="text-align:center" >
         </tr>
     </table>
+<a href="/add">Add User</a>
+<a href="/edit">Edit User</a>
+<a href="/delete">Delete User</a>
+
 </body>
 </html>

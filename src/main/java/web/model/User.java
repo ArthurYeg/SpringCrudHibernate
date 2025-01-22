@@ -9,27 +9,27 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "first_name")
-    private String first_name;
+    @Column(name = "Name")
+    private String Name;
 
-    @Column(name = "last_name")
-    private String last_name;
+    @Column(name = "Last_name")
+    private String Last_name;
 
-    @Column(name = "age")
-    private int age;
+    @Column(name = "Age")
+    private int Age;
 
-    @Column(name = "email")
-    private String email;
+    @Column(name = "Email")
+    private String Email;
 
     public User() {
     }
 
-    public User(String first_name, String last_name, int age, String email) {
+    public User(String Name, String Last_name, int Age, String Email) {
 
-        this.first_name = first_name;
-        this.last_name = last_name;
-        this.age = age;
-        this.email = email;
+        this.Name = Name;
+        this.Last_name = Last_name;
+        this.Age = Age;
+        this.Email = Email;
     }
 
     public Long getId() {
@@ -38,29 +38,29 @@ public class User {
     public void setId(Long id) {
         this.id = id;
     }
-    public String getFirst_name() {
-        return first_name;
+    public String getName() {
+        return Name;
     }
-    public void setFirst_name(String name) {
-        this.first_name = name;
+    public void setName(String name) {
+        this.Name = name;
     }
     public String getLast_name() {
-        return last_name;
+        return Last_name;
     }
-    public void setLast_name(String last_name) {
-        this.last_name = last_name;
+    public void setLast_name(String Last_name) {
+        this.Last_name = Last_name;
     }
     public int getAge() {
-        return age;
+        return Age;
     }
-    public void setAge(int age) {
-        this.age = age;
+    public void setAge(int Age) {
+        this.Age = Age;
     }
     public String getEmail() {
-        return email;
+        return Email;
     }
-    public void setEmail(String email) {
-        this.email = email;
+    public void setEmail(String Email) {
+        this.Email = Email;
     }
 
     @Override
@@ -68,10 +68,10 @@ public class User {
 
         return "User{" +
                 "id=" + id +
-                ", name='" + first_name + '\'' +
-                ", last_name='" + last_name + '\'' +
-                ", age=" + age +
-                ", email='" + email + '\'' +
+                ", name='" + Name + '\'' +
+                ", last_name='" + Last_name + '\'' +
+                ", age=" + Age +
+                ", email='" + Email + '\'' +
                 '}';
     }
 }

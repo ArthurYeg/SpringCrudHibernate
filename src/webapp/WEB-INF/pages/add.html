@@ -1,23 +1,30 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
-<html lang="en">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" lang="en">
 <head>
     <meta charset="UTF-8">
-    <title></title>
+    <title>Add User</title>
 </head>
 <body>
-<form align="center" th:method="POST" th:action="@{/input}" th:object="${user}">
+<h1 style="text-align: center;"><strong>Add User</strong></h1>
+<br>
+<br>
+<br>
+<br>
+<br>
+<table border="1" align="center" cellspacing="0" cellpadding="3"></table>
 
-    <label for="name">Enter name</label>
-    <input type="text" th:field="*{first_name}" id="name"/><br>
-    <label for="last_name">Enter last name</label>
-    <input type="text" th:field="*{last_name}" id="last_name"/><br>
-    <label for="age">Enter age</label>
-    <input type="text" th:field="*{age}" id="age"/><br>
-    <label for="email">Enter email</label>
-    <input type="text" th:field="*{email}" id="email"/><br>
-
-<input type="submit" value = "ADD"/>
-</form>
+<form align="center" th:method="POST" >
+  <form th:action="@{/add}" method="post">
+        <label>Name:</label>
+        <input type="text" name="name" required/>
+      <label>Last_name:</label>
+      <input type="text" name="Last_name" required/>
+        <label>Email:</label>
+        <input type="email" name="email" required/>
+        <label>Age:</label>
+      <input type="text" name="age" required/>
+        <button type="submit">Add</button>
+    </form>
+    <a href="/users">Back to User List</a>
 </body>
 </html>

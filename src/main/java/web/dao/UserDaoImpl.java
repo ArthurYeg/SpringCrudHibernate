@@ -6,6 +6,8 @@ import org.springframework.stereotype.Repository;
 import javax.persistence.EntityManager;
 
 import java.util.List;
+
+import org.springframework.transaction.annotation.Transactional;
 import web.model.User;
 
 @Component
@@ -15,18 +17,18 @@ public class UserDaoImpl implements UserDao {
 
     @Autowired
     public UserDaoImpl(EntityManager entityManager) {
-                this.entityManager = entityManager;
+        this.entityManager = entityManager;
     }
 
     @Override
+    @Transactional
     public void addUser(User user) {
         entityManager.persist(user);
     }
 
     @Override
-    @SuppressWarnings("unchecked")
     public List<User> listUsers() {
-        return entityManager.createQuery(" FROM User").getResultList();
+        return entityManager.createQuery(" FROM User", User.class).getResultList();
 
     }
 
@@ -39,15 +41,17 @@ public class UserDaoImpl implements UserDao {
     public void editUser(Long id, User user) {
 
         User edit = entityManager.find(User.class, id);
-        edit.setFirst_name(user.getFirst_name());
-        edit.setLast_name(user.getLast_name());
-        edit.setAge(user.getAge());
+        edit.setName(user.getName());
         edit.setEmail(user.getEmail());
     }
 
     @Override
-       public void deleteUser(Long id) {
-        entityManager.remove(entityManager.find(User.class, id));
+    @Transactional
+    public void deleteUser(Long id) {
+        User user = entityManager.find(User.class, id);
+        if (user != null) {
+            entityManager.remove(user);
+        }
     }
 }
 
