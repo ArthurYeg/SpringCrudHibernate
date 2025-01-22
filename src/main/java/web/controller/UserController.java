@@ -40,24 +40,24 @@ public class UserController {
     }
 
     @GetMapping("/edit")
-    public String editUser(@RequestParam("id") Long id, Model model) {
+    public String editUser(@RequestParam int id, Model model) {
         model.addAttribute("user", userService.getUser(id));
         return "edit";
     }
 
     @PostMapping("/edit")
-    public String editUser(@RequestParam("id") Long id, @ModelAttribute User user) {
-        userService.editUser(id, user);
+    public String editUser(@RequestParam int id,@ModelAttribute User user) {
+        userService.editUser(id,user);
         return "redirect:/users";
     }
 
     @GetMapping("/delete")
-    public String delete(@RequestParam("id") Long id, Model model) {
+    public String delete(@RequestParam int id, Model model) {
         model.addAttribute("user",userService.getUser(id));
         return "delete";
     }
     @PostMapping("/delete")
-    public String deleteUser(@RequestParam("id") Long id) {
+    public String deleteUser(@RequestParam  int id) {
         userService.deleteUser(id);
         return "redirect:/users";
     }
