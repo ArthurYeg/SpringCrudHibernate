@@ -10,7 +10,7 @@
 <br>
 <br>
 <table border="1" align="center" cellspacing="0" cellpadding="3"></table>
-<form align="center" th:action="@{/delete}" th:method="POST">
+<form align="center" th:action="/delete" th:method="POST">
     <input type="hidden" th:field="*{id}"/>
     <label>Name:</label>
     <input type="text" th:field="*{name}" required/>
