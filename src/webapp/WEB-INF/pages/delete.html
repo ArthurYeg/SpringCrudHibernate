@@ -2,24 +2,27 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Dlete User</title>
+    <title>Delete User</title>
 </head>
 <body>
 <h1 style="text-align: center;"><strong>Delete User</strong></h1>
-<br>
-<br>
-<br>
-<table border="1" align="center" cellspacing="0" cellpadding="3"></table>
-<form align="center" th:action="/delete" th:method="POST">
+<br><br><br>
+
+<form align="center" th:action="/delete" method="POST">
     <input type="hidden" name="id" th:field="*{id}"/>
+
     <label>Name:</label>
     <input type="text" th:field="*{name}" required/>
+
     <label>Last Name:</label>
     <input type="text" th:field="*{lastName}" required/>
+
     <label>Email:</label>
     <input type="email" th:field="*{email}" required/>
+
     <label>Age:</label>
     <input type="text" th:field="*{age}" required/>
+
     <button type="submit">Delete</button>
 </form>
 <a href="/users">Back to User List</a>

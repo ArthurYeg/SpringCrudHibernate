@@ -6,20 +6,23 @@
 </head>
 <body>
 <h1 style="text-align: center;"><strong>Edit User</strong></h1>
-<br>
-<br>
-<br>
-<table border="1" align="center" cellspacing="0" cellpadding="3"></table>
-<form align="center" th:action="/edit" th:method="POST">
+<br><br><br>
+
+<form align="center" th:action="/edit" method="post">
     <input type="hidden" name="id" th:field="*{id}"/>
+
     <label>Name:</label>
     <input type="text" th:field="*{name}" required/>
+
     <label>Last Name:</label>
     <input type="text" th:field="*{lastName}" required/>
+
     <label>Email:</label>
     <input type="email" th:field="*{email}" required/>
+
     <label>Age:</label>
     <input type="text" th:field="*{age}" required/>
+
     <button type="submit">Edit</button>
     </form>
     <a href="/users">Back to User List</a>
