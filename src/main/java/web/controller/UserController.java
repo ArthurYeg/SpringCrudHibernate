@@ -28,13 +28,13 @@ public class UserController {
     }
 
     @GetMapping("/add")
-    public String addUser(Model model) {
+    public String add(Model model) {
         model.addAttribute("user", new User());
         return "add";
     }
 
     @PostMapping("/add")
-    public String AddUserForm(@ModelAttribute User user) {
+    public String AddUser(@ModelAttribute User user) {
         userService.addUser(user);
         return "redirect:/users";
     }
@@ -56,7 +56,7 @@ public class UserController {
         model.addAttribute("user",userService.getUser(id));
         return "delete";
     }
-    @DeleteMapping("/delete")
+    @PostMapping("/delete")
     public String deleteUser(@RequestParam(value = "id") int id) {
         userService.deleteUser(id);
         return "redirect:/users";
