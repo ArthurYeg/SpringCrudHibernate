@@ -9,22 +9,18 @@
 <br>
 <br>
 <br>
-<br>
-<br>
 <table border="1" align="center" cellspacing="0" cellpadding="3"></table>
-
-<form align="center" th:method="POST">
-    <form th:action="@{/edit}" method="post">
-        <input type="hidden" th:field="*{id}"/>
-        <label>Name:</label>
-        <input type="text" name="name" required/>
-        <label>Last_Name:</label>
-        <input type="text" name="lastName" required/>
-        <label>Email:</label>
-        <input type="email" name="email" required/>
-        <label>Age:</label>
-        <input type="text" name="age" required/>
-        <button type="submit">Edit</button>
+<form align="center" th:action="@{/edit}" th:method="PATCH">
+    <input type="hidden" th:field="*{id}"/>
+    <label>Name:</label>
+    <input type="text" th:field="*{name}" required/>
+    <label>Last Name:</label>
+    <input type="text" th:field="*{lastName}" required/>
+    <label>Email:</label>
+    <input type="email" th:field="*{email}" required/>
+    <label>Age:</label>
+    <input type="text" th:field="*{age}" required/>
+    <button type="submit">Edit</button>
     </form>
     <a href="/users">Back to User List</a>
 </body>

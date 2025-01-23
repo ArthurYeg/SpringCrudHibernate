@@ -12,8 +12,8 @@ public class User {
     @Column(name = "Name")
     private String Name;
 
-    @Column(name = "Last_name")
-    private String Last_name;
+    @Column(name = "Last_Name")
+    private String Last_Name;
 
     @Column(name = "Age")
     private int Age;
@@ -24,11 +24,11 @@ public class User {
     public User() {
     }
 
-    public User(int id, String Name, String Last_name, int Age, String Email) {
+    public User(int id, String Name, String Last_Name, int Age, String Email) {
 
         this.id=id;
         this.Name = Name;
-        this.Last_name = Last_name;
+        this.Last_Name = Last_Name;
         this.Age = Age;
         this.Email = Email;
     }
@@ -45,11 +45,11 @@ public class User {
     public void setName(String name) {
         this.Name = name;
     }
-    public String getLast_name() {
-        return Last_name;
+    public String getLast_Name() {
+        return Last_Name;
     }
-    public void setLast_name(String Last_name) {
-        this.Last_name = Last_name;
+    public void setLast_Name(String Last_name) {
+        this.Last_Name = Last_Name;
     }
     public int getAge() {
         return Age;
@@ -70,7 +70,7 @@ public class User {
         return "User{" +
                 "id=" + id +
                 ", name='" + Name + '\'' +
-                ", last_name='" + Last_name + '\'' +
+                ", Last_Name='" + Last_Name + '\'' +
                 ", age=" + Age +
                 ", email='" + Email + '\'' +
                 '}';

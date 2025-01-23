@@ -13,7 +13,6 @@ import java.util.List;
 
 @Controller
 public class UserController {
-
     private final UserService userService;
 
     @Autowired
@@ -21,12 +20,15 @@ public class UserController {
         this.userService = userService;
     }
 
+    @GetMapping("/")
+    public String show( Model model) {
+         return "refirect:users";
+    }
     @GetMapping("/users")
     public String showUsers( Model model) {
         model.addAttribute("users", userService.listUsers());
         return "users";
     }
-
     @GetMapping("/add")
     public String addUser(Model model) {
         model.addAttribute("user", new User());
@@ -36,29 +38,29 @@ public class UserController {
     @PostMapping("/add")
     public String AddUserForm(@ModelAttribute User user) {
         userService.addUser(user);
-        return "redirect:/users";
+        return "redirect:users";
     }
 
-    @GetMapping("/edit")
-    public String editUser(@RequestParam int id, Model model) {
+    @GetMapping("/{id}/edit")
+    public String editUser(@RequestParam (value = "id") int id, Model model) {
         model.addAttribute("user", userService.getUser(id));
         return "edit";
     }
 
-    @PostMapping("/edit")
-    public String editUser(@RequestParam int id,@ModelAttribute User user) {
+    @PostMapping("/{id}")
+    public String editUser(@RequestParam(value = "id") int id, @ModelAttribute ("user") User user) {
         userService.editUser(id,user);
-        return "redirect:/users";
+        return "redirect:users";
     }
 
-    @GetMapping("/delete")
-    public String delete(@RequestParam int id, Model model) {
+    @GetMapping("/{id}/delete")
+    public String delete(@RequestParam (value = "id") int id, Model model) {
         model.addAttribute("user",userService.getUser(id));
         return "delete";
     }
-    @PostMapping("/delete")
-    public String deleteUser(@RequestParam  int id) {
+    @DeleteMapping("/{id}")
+    public String deleteUser(@RequestParam(value = "id") int id) {
         userService.deleteUser(id);
-        return "redirect:/users";
+        return "redirect:users";
     }
 }
