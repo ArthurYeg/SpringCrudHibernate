@@ -10,16 +10,16 @@ public class User {
     private int id;
 
     @Column(name = "Name")
-    private String Name;
+    private String name;
 
     @Column(name = "Last_Name")
-    private String Last_Name;
+    private String lastName;
 
     @Column(name = "Age")
-    private int Age;
+    private int age;
 
     @Column(name = "Email")
-    private String Email;
+    private String email;
 
     public User() {
     }
@@ -27,10 +27,10 @@ public class User {
     public User(int id, String Name, String Last_Name, int Age, String Email) {
 
         this.id=id;
-        this.Name = Name;
-        this.Last_Name = Last_Name;
-        this.Age = Age;
-        this.Email = Email;
+        this.name = name;
+        this.lastName = lastName;
+        this.age = age;
+        this.email = email;
     }
 
     public int getId() {
@@ -40,28 +40,28 @@ public class User {
         this.id = id;
     }
     public String getName() {
-        return Name;
+        return name;
     }
     public void setName(String name) {
-        this.Name = name;
+        this.name = name;
     }
-    public String getLast_Name() {
-        return Last_Name;
+    public String getLastName() {
+        return lastName;
     }
-    public void setLast_Name(String Last_name) {
-        this.Last_Name = Last_Name;
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
     }
     public int getAge() {
-        return Age;
+        return age;
     }
     public void setAge(int Age) {
-        this.Age = Age;
+        this.age = Age;
     }
     public String getEmail() {
-        return Email;
+        return email;
     }
     public void setEmail(String Email) {
-        this.Email = Email;
+        this.email = Email;
     }
 
     @Override
@@ -69,10 +69,10 @@ public class User {
 
         return "User{" +
                 "id=" + id +
-                ", name='" + Name + '\'' +
-                ", Last_Name='" + Last_Name + '\'' +
-                ", age=" + Age +
-                ", email='" + Email + '\'' +
+                ", name='" + name + '\'' +
+                ", Last_Name='" + lastName + '\'' +
+                ", age=" + age +
+                ", email='" + email + '\'' +
                 '}';
     }
 }

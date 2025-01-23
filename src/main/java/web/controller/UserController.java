@@ -46,7 +46,7 @@ public class UserController {
     }
 
     @PostMapping("/edit")
-    public String editUser(@RequestParam(value = "id") int id, @ModelAttribute User user) {
+    public String editUser(@RequestParam(value = "id", required =true) Integer id, @ModelAttribute User user) {
         userService.editUser(id,user);
         return "redirect:/users";
     }
@@ -57,7 +57,7 @@ public class UserController {
         return "delete";
     }
     @PostMapping("/delete")
-    public String deleteUser(@RequestParam(value = "id") int id) {
+    public String deleteUser(@RequestParam(value = "id", required =true) Integer id) {
         userService.deleteUser(id);
         return "redirect:/users";
     }
