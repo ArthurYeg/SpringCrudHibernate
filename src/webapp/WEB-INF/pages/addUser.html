@@ -7,7 +7,7 @@
     <title>Create user</title>
 </head>
 <body>
-<form th:action="@{/user/edit}" th:object="${user}" method="POST">
+<form align="center"  th:action="@{/user/edit}" th:object="${user}" method="POST">
     <input name="id" th:field="*{id}" th:value="${user.id}" hidden="hidden">
     </br>
     <label for="name">Name</label>
@@ -26,7 +26,8 @@
     <input type="text" id="age" th:field="*{age}" th:value="${user.age}" required>
     <div style="color: red" th:if="${#fields.hasErrors('age')}" th:errors="*{age}">Age error</div>
     </br>
-    <button type="submit">Add User</button>
+
+    <input type="submit" value="Add User"/>
 </form>
 </body>
 </html>

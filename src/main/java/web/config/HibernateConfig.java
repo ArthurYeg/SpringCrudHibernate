@@ -26,7 +26,9 @@ import java.util.Properties;
 
 @Configuration
 @PropertySource("classpath:db.properties")
+@EnableJpaRepositories("web.dao")
 @EnableTransactionManagement
+@ComponentScan("web")
 public class HibernateConfig {
 
     private final Environment environment;
