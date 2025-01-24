@@ -3,17 +3,16 @@ package web.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.ui.ModelMap;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import web.model.User;
 import web.service.UserService;
 
-import java.util.List;
+import javax.validation.Valid;
 
 @Controller
 public class UserController {
-
     private final UserService userService;
 
     @Autowired
@@ -22,43 +21,44 @@ public class UserController {
     }
 
     @GetMapping("/users")
-    public String showUsers( Model model) {
+    public String getAllUsers(Model model) {
         model.addAttribute("users", userService.listUsers());
         return "users";
     }
 
     @GetMapping("/add")
-    public String add(Model model) {
+    public String ShowAddUser (Model model) {
         model.addAttribute("user", new User());
-        return "add";
+        return "addUser "; // Удалите лишний пробел
     }
 
     @PostMapping("/add")
-    public String AddUser(@ModelAttribute User user) {
-        userService.addUser(user);
+    public String AddUser (@Valid @ModelAttribute("user") User user, BindingResult bindingResult) {
+        if (bindingResult.hasErrors()) {
+            return "addUser "; // Обработка ошибок валидации
+        }
+        userService.addUser (user);
         return "redirect:/users";
     }
 
-    @GetMapping("/edit")
-    public String edit(@RequestParam int id, Model model) {
-        model.addAttribute("user", userService.getUser(id));
-        return "edit";
+    @GetMapping("/edit/{id}")
+    public String ShowEditUser (@PathVariable int id, Model model) {
+        model.addAttribute("user", userService.getUser (id));
+        return "editUser "; // Удалите лишний пробел
     }
 
-    @PostMapping("/edit")
-    public String editUser(@RequestParam(value = "id", required =true) Integer id, @ModelAttribute User user) {
-        userService.editUser(id,user);
+    @PostMapping("/edit/{id}")
+    public String EditUser (@PathVariable int id, @Valid @ModelAttribute("user") User user, BindingResult bindingResult) {
+        if (bindingResult.hasErrors()) {
+            return "editUser "; // Обработка ошибок валидации
+        }
+        userService.editUser (id, user);
         return "redirect:/users";
     }
 
-    @GetMapping("/delete")
-    public String delete(@RequestParam int id, Model model) {
-        model.addAttribute("user",userService.getUser(id));
-        return "delete";
-    }
-    @PostMapping("/delete")
-    public String deleteUser(@RequestParam(value = "id", required =true) Integer id) {
-        userService.deleteUser(id);
+    @GetMapping("/delete/{id}")
+    public String DeleteUser (@PathVariable int id) { // Используйте @PathVariable вместо @RequestParam
+        userService.deleteUser (id);
         return "redirect:/users";
     }
 }

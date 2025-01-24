@@ -4,54 +4,58 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Repository;
 import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 
 import java.util.List;
 
 import org.springframework.transaction.annotation.Transactional;
 import web.model.User;
-
-@Component
+@Repository
 public class UserDaoImpl implements UserDao {
 
-    private final EntityManager entityManager;
-
-    @Autowired
-    public UserDaoImpl(EntityManager entityManager) {
-        this.entityManager = entityManager;
-    }
+    @PersistenceContext
+    private EntityManager entityManager; // Инъекция EntityManager
 
     @Override
     @Transactional
-    public void addUser(User user) {
+    public void addUser (User user) {
         entityManager.persist(user);
     }
 
     @Override
+    @Transactional(readOnly = true)
     public List<User> listUsers() {
-        return entityManager.createQuery(" FROM User", User.class).getResultList();
-
+        return entityManager.createQuery("FROM User", User.class).getResultList();
     }
 
     @Override
-    public User getUser(int id) {
+    @Transactional(readOnly = true)
+    public User getUser (int id) {
         return entityManager.find(User.class, id);
     }
 
     @Override
-    public void editUser(int id, User user) {
+    @Transactional
+    public void editUser (int id, User user) {
+        User edit = entityManager.find(User.class, id); // Найти пользователя по ID
+        if (edit != null) { // Проверяем, существует ли пользователь
+            // Обновляем поля пользователя
+            edit.setName(user.getName());
+            edit.setSurname(user.getSurname());
+            edit.setEmail(user.getEmail());
+            edit.setAge(user.getAge());
 
-        User edit = entityManager.find(User.class, id);
-        edit.setName(user.getName());
-        edit.setEmail(user.getEmail());
+            // Сохраняем изменения
+            entityManager.merge(edit); // Обеспечиваем сохранение изменений
+        }
     }
 
     @Override
     @Transactional
-    public void deleteUser(int id) {
+    public void deleteUser (int id) {
         User user = entityManager.find(User.class, id);
         if (user != null) {
             entityManager.remove(user);
         }
     }
 }
-

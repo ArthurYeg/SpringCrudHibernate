@@ -1,34 +1,39 @@
 package web.model;
-
 import javax.persistence.*;
+import javax.validation.constraints.*;
 
 @Entity
 @Table(name = "users")
 public class User {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @Column(name = "Name")
+    @NotEmpty(message = "Name should not be empty")
+    @Pattern(regexp = "^[a-zA-Z]+$", message = "Name should contain only letters")
+    @Size(min = 2, max = 35, message = "Name should be between 2 and 35 characters")
     private String name;
 
-    @Column(name = "Last_Name")
-    private String lastName;
+    @NotEmpty(message = "Surname should not be empty")
+    @Pattern(regexp = "^[a-zA-Z]+$", message = "Surname should contain only letters")
+    @Size(min = 2, max = 35, message = "Surname should be between 2 and 35 characters")
+    private String surname;
 
-    @Column(name = "Age")
+    @Min(value = 1, message = "Age should be greater than 0")
     private int age;
 
-    @Column(name = "Email")
+    @NotEmpty(message = "Email should not be empty")
+    @Email(message = "Email should be valid")
     private String email;
 
     public User() {
     }
 
-    public User(int id, String Name, String Last_Name, int Age, String Email) {
-
-        this.id=id;
+    public User(int id, String name, String surname, int age, String email) {
+        this.id = id;
         this.name = name;
-        this.lastName = lastName;
+        this.surname = surname;
         this.age = age;
         this.email = email;
     }
@@ -36,48 +41,51 @@ public class User {
     public int getId() {
         return id;
     }
+
     public void setId(int id) {
         this.id = id;
     }
+
     public String getName() {
         return name;
     }
+
     public void setName(String name) {
         this.name = name;
     }
-    public String getLastName() {
-        return lastName;
+
+    public String getSurname() {
+        return surname;
     }
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
+
+    public void setSurname(String surname) {
+        this.surname = surname; // Исправлено
     }
+
     public int getAge() {
         return age;
     }
-    public void setAge(int Age) {
-        this.age = Age;
+
+    public void setAge(int age) {
+        this.age = age;
     }
+
     public String getEmail() {
         return email;
     }
-    public void setEmail(String Email) {
-        this.email = Email;
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     @Override
     public String toString() {
-
-        return "User{" +
+        return "User {" +
                 "id=" + id +
                 ", name='" + name + '\'' +
-                ", Last_Name='" + lastName + '\'' +
+                ", surname='" + surname + '\'' +
                 ", age=" + age +
                 ", email='" + email + '\'' +
                 '}';
     }
 }
-
-
-
-
-
