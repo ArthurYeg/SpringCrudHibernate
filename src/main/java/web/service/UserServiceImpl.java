@@ -6,11 +6,14 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Optional;
+
 import web.dao.UserDao;
 import web.model.User;
 
 @Service()
 public class UserServiceImpl implements UserService {
+
     private final UserDao userDao;
 
     @Autowired
@@ -19,8 +22,8 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void addUser(User user) {
-        userDao.addUser(user);
+    public void save(User user) {
+        userDao.save(user);
     }
 
     @Override
@@ -29,13 +32,13 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User getUser(int id) {
-        return userDao.getUser(id);
+    public Optional <User> findById(int id) {
+        return userDao.findById(id);
     }
 
     @Override
-    public void editUser(int id, User user) {
-        userDao.editUser(id, user);
+    public void editUser(User user) {
+        userDao.editUser(user);
     }
 
     @Override

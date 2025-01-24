@@ -1,29 +1,32 @@
+
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns="http://www.w3.org/1999/html">
 <head>
     <meta charset="UTF-8">
-    <title>Add User</title>
+    <title>Create user</title>
 </head>
 <body>
-<h1 style="text-align: center;"><strong>Add User</strong></h1>
-<br><br><br>
-
-<form align="center" th:action="@{/add}" method="post">
-
-        <label>Name:</label>
-        <input type="text" name="name" required/>
-
-        <label>Last_Name:</label>
-        <input type="text" name="lastName" required/>
-
-        <label>Email:</label>
-        <input type="email" name="email" required/>
-
-        <label>Age:</label>
-        <input type="text" name="age" required/>
-
-        <button type="submit">Add</button>
-    </form>
-    <a href="/users">Back to User List</a>
+<form th:action="@{/user/edit}" th:object="${user}" method="POST">
+    <input name="id" th:field="*{id}" th:value="${user.id}" hidden="hidden">
+    </br>
+    <label for="name">Name</label>
+    <input type="text" id="name" th:field="*{name}" th:value="${user.name}" required>
+    <div style="color: red" th:if="${#fields.hasErrors('name')}" th:errors="*{surname}">Name error</div>
+    </br>
+    <label for="surname">Surname</label>
+    <input type="text" id="surname" th:field="*{surname}" th:value="${user.surname}" required>
+    <div style="color: red" th:if="${#fields.hasErrors('surname')}" th:errors="*{surname}">Surname error</div>
+    </br>
+    <label for="email">Email</label>
+    <input type="text" id="email" th:field="*{email}" th:value="${user.email}" required>
+    <div style="color: red" th:if="${#fields.hasErrors('email')}" th:errors="*{email}">Email error</div>
+    </br>
+    <label for="age">Age</label>
+    <input type="text" id="age" th:field="*{age}" th:value="${user.age}" required>
+    <div style="color: red" th:if="${#fields.hasErrors('age')}" th:errors="*{age}">Age error</div>
+    </br>
+    <button type="submit">Add User</button>
+</form>
 </body>
 </html>

@@ -10,9 +10,13 @@ import web.model.User;
 import web.service.UserService;
 
 import javax.validation.Valid;
+import java.util.List;
+import java.util.Optional;
 
 @Controller
+@RequestMapping("/users")
 public class UserController {
+
     private final UserService userService;
 
     @Autowired
@@ -20,46 +24,55 @@ public class UserController {
         this.userService = userService;
     }
 
-    @GetMapping("/users")
-    public String getAllUsers(Model model) {
-        model.addAttribute("users", userService.listUsers());
-        return "users";
+    @GetMapping
+    public String AllUsers(Model model) {
+        List<User>users=userService.listUsers();
+        model.addAttribute("users", users);
+        return "user/userList";
     }
 
-    @GetMapping("/add")
-    public String showAddUser (Model model) {
-        model.addAttribute("user", new User());
-        return "addUser ";
+    @GetMapping("/new")
+    public String showAddUser (@ModelAttribute("user") User user) {
+        System.out.println("new user");
+        return "user/addUser ";
     }
 
-    @PostMapping("/add")
-    public String addUser (@Valid @ModelAttribute("user") User user, BindingResult bindingResult) {
+    @PostMapping
+    public String save ( @ModelAttribute("user") @Valid User user,
+                            BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
-            return "addUser ";
+            return "user/addUser ";
         }
-        userService.addUser (user);
+        userService.save(user);
+        return "redirect:/user";
+    }
+
+    @GetMapping("/edit")
+    public String showEditUser (@RequestParam("id") int id, Model model) {
+        Optional<User> userById = userService.findById(id);
+
+        if (userById.isPresent()) {
+            model.addAttribute("user", userById.get());
+            return "user/editUser";
+        } else {
+            return "redirect:/users";
+        }
+    }
+
+
+    @PostMapping("/edit/")
+    public String editUser(@ModelAttribute("user") @Valid User user,
+                             BindingResult bindingResult) {
+        if (bindingResult.hasErrors()) {
+            return "user/editUser";
+        }
+        userService.editUser(user);
         return "redirect:/users";
     }
 
-    @GetMapping("/edit/{id}")
-    public String showEditUser (@PathVariable int id, Model model) {
-        model.addAttribute("user", userService.getUser (id));
-        return "editUser ";
-    }
-
-
-    @PostMapping("/edit/{id}")
-    public String editUser (@PathVariable int id, @Valid @ModelAttribute("user") User user, BindingResult bindingResult) {
-        if (bindingResult.hasErrors()) {
-            return "editUser ";
-        }
-        userService.editUser (id, user);
-        return "redirect:/users";
-    }
-
-    @GetMapping("/delete/{id}")
-    public String deleteUser (@PathVariable int id) {
-        userService.deleteUser (id);
+    @PostMapping("/delete")
+    public String deleteUser(@RequestParam("id") int id) {
+        userService.deleteUser(id);
         return "redirect:/users";
     }
 }
