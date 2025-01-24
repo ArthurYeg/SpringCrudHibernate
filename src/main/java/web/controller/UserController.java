@@ -27,37 +27,38 @@ public class UserController {
     }
 
     @GetMapping("/add")
-    public String ShowAddUser (Model model) {
+    public String showAddUser (Model model) {
         model.addAttribute("user", new User());
-        return "addUser "; // Удалите лишний пробел
+        return "addUser ";
     }
 
     @PostMapping("/add")
-    public String AddUser (@Valid @ModelAttribute("user") User user, BindingResult bindingResult) {
+    public String addUser (@Valid @ModelAttribute("user") User user, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
-            return "addUser "; // Обработка ошибок валидации
+            return "addUser ";
         }
         userService.addUser (user);
         return "redirect:/users";
     }
 
     @GetMapping("/edit/{id}")
-    public String ShowEditUser (@PathVariable int id, Model model) {
+    public String showEditUser (@PathVariable int id, Model model) {
         model.addAttribute("user", userService.getUser (id));
-        return "editUser "; // Удалите лишний пробел
+        return "editUser ";
     }
 
+
     @PostMapping("/edit/{id}")
-    public String EditUser (@PathVariable int id, @Valid @ModelAttribute("user") User user, BindingResult bindingResult) {
+    public String editUser (@PathVariable int id, @Valid @ModelAttribute("user") User user, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
-            return "editUser "; // Обработка ошибок валидации
+            return "editUser ";
         }
         userService.editUser (id, user);
         return "redirect:/users";
     }
 
     @GetMapping("/delete/{id}")
-    public String DeleteUser (@PathVariable int id) { // Используйте @PathVariable вместо @RequestParam
+    public String deleteUser (@PathVariable int id) {
         userService.deleteUser (id);
         return "redirect:/users";
     }
