@@ -31,26 +31,25 @@ public class UserController {
         return "user/userList";
     }
 
-    @GetMapping("/new")
-    public String showAddUser (@ModelAttribute("user") User user) {
-        System.out.println("new user");
-        return "user/addUser ";
+    @GetMapping("/add")
+    public String showAddUser ( Model model) {
+        model.addAttribute("user", new User());
+        return "user/addUser";
     }
 
-    @PostMapping
-    public String save ( @ModelAttribute("user") @Valid User user,
+    @PostMapping("/add")
+    public String save( @ModelAttribute("user") @Valid User user,
                             BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
-            return "user/addUser ";
+            return "user/addUser";
         }
         userService.save(user);
-        return "redirect:/user";
+        return "redirect:/users";
     }
 
     @GetMapping("/edit")
     public String showEditUser (@RequestParam("id") int id, Model model) {
         Optional<User> userById = userService.findById(id);
-
         if (userById.isPresent()) {
             model.addAttribute("user", userById.get());
             return "user/editUser";
@@ -58,9 +57,7 @@ public class UserController {
             return "redirect:/users";
         }
     }
-
-
-    @PostMapping("/edit/")
+    @PostMapping("/edit")
     public String editUser(@ModelAttribute("user") @Valid User user,
                              BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {

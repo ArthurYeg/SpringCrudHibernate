@@ -1,17 +1,19 @@
+
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org"
-      xmlns="http://www.w3.org/1999/html" xmlns="http://www.w3.org/1999/html">
+      xmlns="http://www.w3.org/1999/html">
 <head>
     <meta charset="UTF-8">
-    <title>Edit user</title>
+    <title>Create user</title>
 </head>
 <body>
-<form align="center"  th:action="@{/user/edit}" th:object="${user}" method="POST">
+
+<form align="center"  th:action="@{/users/add}" th:object="${user}" method="POST">
     <input name="id" th:field="*{id}" th:value="${user.id}" hidden="hidden">
     </br>
     <label for="name">Name</label>
     <input type="text" id="name" th:field="*{name}" th:value="${user.name}" required>
-    <div style="color: red" th:if="${#fields.hasErrors('name')}" th:errors="*{surname}">Name error</div>
+    <div style="color: red" th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Name error</div>
     </br>
     <label for="surname">Surname</label>
     <input type="text" id="surname" th:field="*{surname}" th:value="${user.surname}" required>
@@ -25,6 +27,8 @@
     <input type="text" id="age" th:field="*{age}" th:value="${user.age}" required>
     <div style="color: red" th:if="${#fields.hasErrors('age')}" th:errors="*{age}">Age error</div>
     </br>
-    <input type="submit" value="Update User"/>
+
+    <input type="submit" value="Add User"/>
 </form>
 </body>
+</html>
