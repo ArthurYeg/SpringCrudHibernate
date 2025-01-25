@@ -67,9 +67,20 @@ public class UserController {
         return "redirect:/users";
     }
 
+    @GetMapping("/delete/{id}")
+    public String showDeleteUser(@PathVariable("id") int id, Model model) {
+        Optional<User> userById = userService.findById(id);
+        if (userById.isPresent()) {
+            model.addAttribute("user", userById.get());
+            return "user/deleteUser";
+        } else {
+            return "redirect:/users";
+        }
+    }
+
     @PostMapping("/delete/{id}")
     public String deleteUser(@PathVariable("id") int id) {
-        userService.deleteUser(id);
+        userService.deleteUser(id); // вызываем метод удаления по id
         return "redirect:/users";
     }
 }
