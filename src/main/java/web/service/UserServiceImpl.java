@@ -22,26 +22,31 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    @Transactional
     public void save(User user) {
         userDao.save(user);
     }
 
     @Override
+    @Transactional(readOnly = true)
     public List<User> listUsers() {
         return userDao.listUsers();
     }
 
     @Override
+    @Transactional(readOnly = true)
     public Optional <User> findById(int id) {
         return userDao.findById(id);
     }
 
     @Override
+    @Transactional
     public void editUser(User user) {
         userDao.editUser(user);
     }
 
     @Override
+    @Transactional
     public void deleteUser(int id) {
         userDao.deleteUser(id);
     }
