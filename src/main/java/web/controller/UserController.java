@@ -27,6 +27,8 @@ public class UserController {
     @GetMapping
     public String AllUsers(Model model) {
         List<User>users=userService.listUsers();
+        users.add(new User(1, "John", "Doe", 30, "john.doe@example.com"));
+        users.add(new User(2, "Jane", "Doe", 25, "jane.doe@example.com"));
         model.addAttribute("users", users);
         return "user/userList";
     }
