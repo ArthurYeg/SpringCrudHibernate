@@ -7,24 +7,20 @@
 <body>
 
 <h1 align="center">Edit User</h1>
-<form align="center" th:action="@{/users/edit}" th:object="${user}" method="POST">
-    <input name="id" th:field="*{id}" th:value="${user.id}" hidden="hidden">
+<form align="center" action="/users/edit" th:object="${user}" method="POST">
+    <input th:field="*{id}"  type="hidden"/>
     </br>
     <label for="name">Name</label>
-    <input type="text" id="name" th:field="*{name}" th:value="${user.name}" required>
-    <div style="color: red" th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Name error</div>
+    <input type="text" th:field="*{name}" />
     </br>
     <label for="surname">Surname</label>
-    <input type="text" id="surname" th:field="*{surname}" th:value="${user.surname}" required>
-    <div style="color: red" th:if="${#fields.hasErrors('surname')}" th:errors="*{surname}">Surname error</div>
+    <input type="text" th:field="*{surname}" />
     </br>
     <label for="email">Email</label>
-    <input type="text" id="email" th:field="*{email}" th:value="${user.email}" required>
-    <div style="color: red" th:if="${#fields.hasErrors('email')}" th:errors="*{email}">Email error</div>
+    <input type="text" th:field="*{email}" />
     </br>
     <label for="age">Age</label>
-    <input type="text" id="age" th:field="*{age}" th:value="${user.age}" required>
-    <div style="color: red" th:if="${#fields.hasErrors('age')}" th:errors="*{age}">Age error</div>
+    <input type="text" th:field="*{age}" />
     </br>
     <input type="submit" value="Update User"/>
 </form>

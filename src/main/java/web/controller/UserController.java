@@ -1,3 +1,4 @@
+
 package web.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,7 +40,7 @@ public class UserController {
 
     @PostMapping("/add")
     public String save( @ModelAttribute("user") @Valid User user,
-                            BindingResult bindingResult) {
+                        BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
             return "user/addUser";
         }
@@ -47,8 +48,8 @@ public class UserController {
         return "redirect:/users";
     }
 
-    @GetMapping("/edit/{id}")
-    public String showEditUser (@PathVariable("id") int id, Model model) {
+    @GetMapping("/edit")
+    public String showEditUser (@RequestParam("id") int id, Model model) {
         Optional<User> userById = userService.findById(id);
         if (userById.isPresent()) {
             model.addAttribute("user", userById.get());
@@ -59,7 +60,7 @@ public class UserController {
     }
     @PostMapping("/edit")
     public String editUser(@ModelAttribute("user") @Valid User user,
-                             BindingResult bindingResult) {
+                           BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
             return "user/editUser";
         }
@@ -67,8 +68,8 @@ public class UserController {
         return "redirect:/users";
     }
 
-    @GetMapping("/delete/{id}")
-    public String showDeleteUser(@PathVariable("id") int id, Model model) {
+    @GetMapping("/delete")
+    public String showDeleteUser(@RequestParam("id") int id, Model model) {
         Optional<User> userById = userService.findById(id);
         if (userById.isPresent()) {
             model.addAttribute("user", userById.get());
@@ -78,9 +79,9 @@ public class UserController {
         }
     }
 
-    @PostMapping("/delete/{id}")
-    public String deleteUser(@PathVariable("id") int id) {
-        userService.deleteUser(id); // вызываем метод удаления по id
+    @PostMapping("/delete")
+    public String deleteUser(@RequestParam("id") int id) {
+        userService.deleteUser(id);
         return "redirect:/users";
     }
 }
